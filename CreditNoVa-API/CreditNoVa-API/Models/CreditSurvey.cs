@@ -37,23 +37,23 @@ namespace CreditNoVa_API.Models
         // 🔹 Nhóm 2: Thông tin nghề nghiệp & thu nhập
         #region Employment & Income
         [MaxLength(100)]
-        public string Occupation { get; set; }  // Ngề nghiệp
+        public string? Occupation { get; set; }  // Ngề nghiệp
 
         [MaxLength(150)]
-        public string CompanyName { get; set; }
+        public string? CompanyName { get; set; }
 
         [MaxLength(50)]
-        public string CompanyType { get; set; } // Nhà nước/Tư nhân/Nước ngoài/Tự kinh doanh
+        public string? CompanyType { get; set; } // Nhà nước/Tư nhân/Nước ngoài/Tự kinh doanh
 
-        public int YearsAtCurrentJob { get; set; }
+        public int? YearsAtCurrentJob { get; set; }
 
         [Range(0, double.MaxValue)]
-        public decimal MonthlyIncome { get; set; }
+        public decimal? MonthlyIncome { get; set; }
 
         [MaxLength(20)]
-        public string SalaryPaymentMethod { get; set; } // Tiền mặt/Chuyển khoản
+        public string? SalaryPaymentMethod { get; set; } // Tiền mặt/Chuyển khoản
 
-        public string SalarySlipImagePath { get; set; } // đường dẫn file ảnh lưu bảng lương
+        public string? SalarySlipImagePath { get; set; } // đường dẫn file ảnh lưu bảng lương
         #endregion
 
         // 🔹 Nhóm 4: Thông tin tài sản & đảm bảo
@@ -63,11 +63,11 @@ namespace CreditNoVa_API.Models
         public bool HasSavingsAccount { get; set; }
 
         [Range(0, double.MaxValue)]
-        public decimal LifeInsuranceValue { get; set; }
+        public decimal? LifeInsuranceValue { get; set; }
 
-        public string Investments { get; set; } // Cổ phiếu/trái phiếu/đầu tư khác
-        public byte[] SalarySlipImage { get; set; }   // Ảnh bảng lương
-        public byte[] UtilityBillImage { get; set; } // Ảnh hóa đơn điện nước
+        public string? Investments { get; set; } // Cổ phiếu/trái phiếu/đầu tư khác
+        public byte[]? SalarySlipImage { get; set; }  // Ảnh bảng lương
+        public byte[]? UtilityBillImage { get; set; } // Ảnh hóa đơn điện nước
         #endregion
 
         // 🔹 Nhóm 5: Lịch sử tín dụng
@@ -75,16 +75,16 @@ namespace CreditNoVa_API.Models
         public bool HadPreviousLoans { get; set; }
 
         [MaxLength(150)]
-        public string LoanInstitution { get; set; }
+        public string? LoanInstitution { get; set; }
 
         [Range(0, double.MaxValue)]
-        public decimal LoanLimit { get; set; }
+        public decimal? LoanLimit { get; set; }
 
         [Range(0, double.MaxValue)]
-        public decimal CurrentOutstandingDebt { get; set; }
+        public decimal? CurrentOutstandingDebt { get; set; }
 
         [MaxLength(50)]
-        public string LoanTerm { get; set; }
+        public string? LoanTerm { get; set; }
         #endregion
 
         // 🔹 Nhóm 6: Thông tin liên hệ
@@ -93,12 +93,12 @@ namespace CreditNoVa_API.Models
         public string PhoneNumber { get; set; }
 
         [EmailAddress]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [MaxLength(100)]
-        public string Facebook { get; set; }
+        public string? Facebook { get; set; }
         #endregion
 
-        public int CreditScore { get; set; } // Điểm tín dụng
+        public int? CreditScore { get; set; } // Điểm tín dụng
     }
 }

@@ -70,6 +70,39 @@
                     "type": "string",
                     "format": "binary"
                   },
+                  "OwnHouseOrLand": {
+                    "type": "boolean"
+                  },
+                  "OwnCarOrValuableVehicle": {
+                    "type": "boolean"
+                  },
+                  "HasSavingsAccount": {
+                    "type": "boolean"
+                  },
+                  "LifeInsuranceValue": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Investments": {
+                    "type": "string"
+                  },
+                  "HadPreviousLoans": {
+                    "type": "boolean"
+                  },
+                  "LoanInstitution": {
+                    "type": "string"
+                  },
+                  "LoanLimit": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "CurrentOutstandingDebt": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "LoanTerm": {
+                    "type": "string"
+                  },
                   "PhoneNumber": {
                     "type": "string"
                   },
@@ -128,6 +161,36 @@
                   "style": "form"
                 },
                 "UtilityBillImage": {
+                  "style": "form"
+                },
+                "OwnHouseOrLand": {
+                  "style": "form"
+                },
+                "OwnCarOrValuableVehicle": {
+                  "style": "form"
+                },
+                "HasSavingsAccount": {
+                  "style": "form"
+                },
+                "LifeInsuranceValue": {
+                  "style": "form"
+                },
+                "Investments": {
+                  "style": "form"
+                },
+                "HadPreviousLoans": {
+                  "style": "form"
+                },
+                "LoanInstitution": {
+                  "style": "form"
+                },
+                "LoanLimit": {
+                  "style": "form"
+                },
+                "CurrentOutstandingDebt": {
+                  "style": "form"
+                },
+                "LoanTerm": {
                   "style": "form"
                 },
                 "PhoneNumber": {
@@ -321,6 +384,49 @@
         }
       }
     },
+    "/api/survey/{id}/upload-salaryy": {
+      "post": {
+        "tags": [
+          "CreditSurvey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/survey/{id}/upload-salary": {
       "post": {
         "tags": [
@@ -500,12 +606,14 @@
           },
           "yearsAtCurrentJob": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "monthlyIncome": {
             "minimum": 0,
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "salaryPaymentMethod": {
             "maxLength": 20,
@@ -528,7 +636,8 @@
           "lifeInsuranceValue": {
             "minimum": 0,
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "investments": {
             "type": "string",
@@ -555,12 +664,14 @@
           "loanLimit": {
             "minimum": 0,
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "currentOutstandingDebt": {
             "minimum": 0,
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "loanTerm": {
             "maxLength": 50,
@@ -584,7 +695,8 @@
           },
           "creditScore": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
