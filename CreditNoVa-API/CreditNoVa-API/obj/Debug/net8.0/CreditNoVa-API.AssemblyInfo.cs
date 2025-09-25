@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CreditNoVa-API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b823cfc266092aeac64964f131ecae82789c5cc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac9a28e80d6d88560715b00ed119655c458ded09")]
 [assembly: System.Reflection.AssemblyProductAttribute("CreditNoVa-API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CreditNoVa-API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
