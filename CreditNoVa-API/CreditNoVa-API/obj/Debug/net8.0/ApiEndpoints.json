@@ -64,12 +64,12 @@
       },
       {
         "Name": "YearsAtCurrentJob",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "MonthlyIncome",
-        "Type": "System.Decimal",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -85,6 +85,56 @@
       {
         "Name": "UtilityBillImage",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "OwnHouseOrLand",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "OwnCarOrValuableVehicle",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "HasSavingsAccount",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "LifeInsuranceValue",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Investments",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "HadPreviousLoans",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "LoanInstitution",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LoanLimit",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "CurrentOutstandingDebt",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "LoanTerm",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
@@ -212,6 +262,27 @@
     "ContainingType": "CreditNoVa_API.Controllers.CreditSurveyController",
     "Method": "UploadSalarySlip",
     "RelativePath": "api/survey/{id}/upload-salary",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CreditNoVa_API.Controllers.CreditSurveyController",
+    "Method": "CaculateCreditScore",
+    "RelativePath": "api/survey/{id}/upload-salaryy",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

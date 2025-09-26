@@ -16,7 +16,7 @@ namespace CreditNoVa_API.Controllers
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<CreditSurvey>> Create([FromForm] CreditNoVa_API.DataTransferObjects.CreditSurvey dto)
+        public async Task<ActionResult<CreditSurvey>> Create([FromForm] DataTransferObjects.CreditSurvey dto)
         {
             var created = await _service.CreateAsync(dto);
             return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
@@ -53,7 +53,7 @@ namespace CreditNoVa_API.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id}/upload-salary")]
+        [HttpPost("{id}/upload-salaryy")]
         public async Task<IActionResult> CaculateCreditScore(Guid id, IFormFile file)
         {
             var survey = await _service.GetByIdAsync(id);
