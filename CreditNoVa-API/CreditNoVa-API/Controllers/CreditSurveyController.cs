@@ -22,6 +22,16 @@ namespace CreditNoVa_API.Controllers
             return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
         }
 
+        [HttpPut("score/{id}/{score}")]
+        public async Task<ActionResult<CreditSurvey>> UpdateScore(Guid id, int score)
+        {
+            var updated = await _service.UpdateScore(id, score);
+            if (updated == null)
+                return NotFound();
+
+            return Ok(updated);
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CreditSurvey>>> GetAll()
         {
