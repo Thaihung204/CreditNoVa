@@ -1,0 +1,594 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CreditNoVa-API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/survey": {
+      "post": {
+        "tags": [
+          "CreditSurvey"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "FullName": {
+                    "type": "string"
+                  },
+                  "DateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Gender": {
+                    "type": "string"
+                  },
+                  "IdentityNumber": {
+                    "type": "string"
+                  },
+                  "MaritalStatus": {
+                    "type": "string"
+                  },
+                  "NumberOfDependents": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "EducationLevel": {
+                    "type": "string"
+                  },
+                  "Address": {
+                    "type": "string"
+                  },
+                  "Occupation": {
+                    "type": "string"
+                  },
+                  "CompanyName": {
+                    "type": "string"
+                  },
+                  "CompanyType": {
+                    "type": "string"
+                  },
+                  "YearsAtCurrentJob": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "MonthlyIncome": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "SalaryPaymentMethod": {
+                    "type": "string"
+                  },
+                  "SalarySlipImage": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "UtilityBillImage": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string"
+                  },
+                  "Facebook": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "FullName": {
+                  "style": "form"
+                },
+                "DateOfBirth": {
+                  "style": "form"
+                },
+                "Gender": {
+                  "style": "form"
+                },
+                "IdentityNumber": {
+                  "style": "form"
+                },
+                "MaritalStatus": {
+                  "style": "form"
+                },
+                "NumberOfDependents": {
+                  "style": "form"
+                },
+                "EducationLevel": {
+                  "style": "form"
+                },
+                "Address": {
+                  "style": "form"
+                },
+                "Occupation": {
+                  "style": "form"
+                },
+                "CompanyName": {
+                  "style": "form"
+                },
+                "CompanyType": {
+                  "style": "form"
+                },
+                "YearsAtCurrentJob": {
+                  "style": "form"
+                },
+                "MonthlyIncome": {
+                  "style": "form"
+                },
+                "SalaryPaymentMethod": {
+                  "style": "form"
+                },
+                "SalarySlipImage": {
+                  "style": "form"
+                },
+                "UtilityBillImage": {
+                  "style": "form"
+                },
+                "PhoneNumber": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "Facebook": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "CreditSurvey"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CreditSurvey"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CreditSurvey"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CreditSurvey"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/survey/{id}": {
+      "get": {
+        "tags": [
+          "CreditSurvey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CreditSurvey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreditSurvey"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreditSurvey"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreditSurvey"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditSurvey"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CreditSurvey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/survey/{id}/upload-salary": {
+      "post": {
+        "tags": [
+          "CreditSurvey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/survey/{id}/upload-utility": {
+      "post": {
+        "tags": [
+          "CreditSurvey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreditSurvey": {
+        "required": [
+          "dateOfBirth",
+          "fullName",
+          "gender",
+          "identityNumber",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gender": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string"
+          },
+          "identityNumber": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maritalStatus": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "numberOfDependents": {
+            "maximum": 20,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "educationLevel": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "maxLength": 200,
+            "type": "string",
+            "nullable": true
+          },
+          "occupation": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "companyName": {
+            "maxLength": 150,
+            "type": "string",
+            "nullable": true
+          },
+          "companyType": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "yearsAtCurrentJob": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "monthlyIncome": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "salaryPaymentMethod": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "salarySlipImagePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "ownHouseOrLand": {
+            "type": "boolean"
+          },
+          "ownCarOrValuableVehicle": {
+            "type": "boolean"
+          },
+          "hasSavingsAccount": {
+            "type": "boolean"
+          },
+          "lifeInsuranceValue": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "investments": {
+            "type": "string",
+            "nullable": true
+          },
+          "salarySlipImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "utilityBillImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "hadPreviousLoans": {
+            "type": "boolean"
+          },
+          "loanInstitution": {
+            "maxLength": 150,
+            "type": "string",
+            "nullable": true
+          },
+          "loanLimit": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "currentOutstandingDebt": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "loanTerm": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "minLength": 1,
+            "type": "string",
+            "format": "tel"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "facebook": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "creditScore": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
