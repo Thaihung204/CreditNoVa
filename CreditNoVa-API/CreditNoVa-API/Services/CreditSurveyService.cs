@@ -30,6 +30,7 @@ namespace CreditNoVa_API.Services
             var survey = new CreditSurvey
             {
                 Id = Guid.NewGuid(),
+                // 🔹 Nhóm 1: Personal Information
                 FullName = dto.FullName,
                 DateOfBirth = dto.DateOfBirth,
                 Gender = dto.Gender,
@@ -38,18 +39,35 @@ namespace CreditNoVa_API.Services
                 NumberOfDependents = dto.NumberOfDependents,
                 EducationLevel = dto.EducationLevel,
                 Address = dto.Address,
+
+                // 🔹 Nhóm 2: Employment & Income
                 Occupation = dto.Occupation,
                 CompanyName = dto.CompanyName,
                 CompanyType = dto.CompanyType,
                 YearsAtCurrentJob = dto.YearsAtCurrentJob,
                 MonthlyIncome = dto.MonthlyIncome,
                 SalaryPaymentMethod = dto.SalaryPaymentMethod,
+
+                // 🔹 Nhóm 4: Assets & Collateral
+                OwnHouseOrLand = dto.OwnHouseOrLand,
+                OwnCarOrValuableVehicle = dto.OwnCarOrValuableVehicle,
+                HasSavingsAccount = dto.HasSavingsAccount,
+                LifeInsuranceValue = dto.LifeInsuranceValue,
+                Investments = dto.Investments,
+
+                // 🔹 Nhóm 5: Credit History
+                HadPreviousLoans = dto.HadPreviousLoans,
+                LoanInstitution = dto.LoanInstitution,
+                LoanLimit = dto.LoanLimit,
+                LoanTerm = dto.LoanTerm,
+                CurrentOutstandingDebt = dto.CurrentOutstandingDebt,
+
+                // 🔹 Nhóm 6: Contact Information
                 PhoneNumber = dto.PhoneNumber,
                 Email = dto.Email,
                 Facebook = dto.Facebook
             };
 
-            // Lưu file vào DB dưới dạng byte[]
             if (dto.SalarySlipImage != null)
             {
                 using var ms = new MemoryStream();
@@ -64,10 +82,24 @@ namespace CreditNoVa_API.Services
                 survey.UtilityBillImage = ms.ToArray();
             }
 
-            survey.CreditScore = CalculateCreditScore(survey);
-
             await Repo.CreateAsync(survey);
             await Repo.SaveAsync();
+
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    var score = await CalculateCreditScoreAndSendAsync(survey);
+                    survey.CreditScore = score;
+
+                    Repo.Update(survey); 
+                    await Repo.SaveAsync();
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            });
 
             return survey;
         }
@@ -77,6 +109,17 @@ namespace CreditNoVa_API.Services
             var existing = await Repo.GetByIdAsync<CreditSurvey>(id);
             if (existing == null) return null;
             existing.SalarySlipImage = survey.SalarySlipImage;
+            Repo.Update(existing);
+            await Repo.SaveAsync();
+
+            return existing;
+        }
+
+        public async Task<CreditSurvey?> UpdateScore(Guid id, int score)
+        {
+            var existing = await Repo.GetByIdAsync<CreditSurvey>(id);
+            if (existing == null) return null;
+            existing.CreditScore = score;
             Repo.Update(existing);
             await Repo.SaveAsync();
 
@@ -96,30 +139,76 @@ namespace CreditNoVa_API.Services
 
         private async Task<int> CalculateCreditScoreAndSendAsync(CreditSurvey survey)
         {
-            string salarySlipBase64 = survey.SalarySlipImage != null ? Convert.ToBase64String(survey.SalarySlipImage) : null;
-            string utilityBillBase64 = survey.UtilityBillImage != null ? Convert.ToBase64String(survey.UtilityBillImage) : null;
+            string salarySlipBase64 = survey.SalarySlipImage != null
+                ? Convert.ToBase64String(survey.SalarySlipImage)
+                : null;
+
+            string utilityBillBase64 = survey.UtilityBillImage != null
+                ? Convert.ToBase64String(survey.UtilityBillImage)
+                : null;
 
             using (var client = new HttpClient())
             {
                 var payload = new
                 {
-                    image = salarySlipBase64
+                    survey.Id,
+                    survey.FullName,
+                    survey.DateOfBirth,
+                    survey.Gender,
+                    survey.IdentityNumber,
+                    survey.MaritalStatus,
+                    survey.NumberOfDependents,
+                    survey.EducationLevel,
+                    survey.Address,
+                    survey.Occupation,
+                    survey.CompanyName,
+                    survey.CompanyType,
+                    survey.YearsAtCurrentJob,
+                    survey.MonthlyIncome,
+                    survey.SalaryPaymentMethod,
+                    SalarySlipImage = salarySlipBase64,
+                    UtilityBillImage = utilityBillBase64,
+                    survey.OwnHouseOrLand,
+                    survey.OwnCarOrValuableVehicle,
+                    survey.HasSavingsAccount,
+                    survey.LifeInsuranceValue,
+                    survey.Investments,
+                    survey.HadPreviousLoans,
+                    survey.LoanInstitution,
+                    survey.LoanLimit,
+                    survey.CurrentOutstandingDebt,
+                    survey.LoanTerm,
+                    survey.PhoneNumber,
+                    survey.Email,
+                    survey.Facebook
                 };
 
                 var json = System.Text.Json.JsonSerializer.Serialize(payload);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync("https://dattien2703.app.n8n.cloud/webhook-test/cc9772a0-c0f9-49c5-850f-3942beceb49a", content);
+                var response = await client.PostAsync(
+                    "https://dattien2703.app.n8n.cloud/webhook-test/cc9772a0-c0f9-49c5-850f-3942beceb49a",
+                    content);
+
                 response.EnsureSuccessStatusCode();
                 string responseString = await response.Content.ReadAsStringAsync();
 
-                if (int.TryParse(responseString, out int score))
+                try
                 {
-                    return score;
+                    using var doc = System.Text.Json.JsonDocument.Parse(responseString);
+
+                    if (doc.RootElement.TryGetProperty("credit_score", out var scoreElement))
+                    {
+                        return scoreElement.GetInt32();
+                    }
+
+                    throw new Exception("Không tìm thấy trường 'credit_score' trong JSON.");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Lỗi khi parse JSON: {ex.Message}\nResponse: {responseString}");
                 }
             }
-
-            throw new Exception("Response không phải kiểu int: ");
         }
 
         private int CalculateCreditScore(CreditSurvey survey)

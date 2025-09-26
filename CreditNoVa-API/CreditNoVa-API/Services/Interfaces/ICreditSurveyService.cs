@@ -8,6 +8,7 @@ namespace CreditNoVa_API.Services.Interfaces
         Task<CreditSurvey> GetByIdAsync(Guid id);
         Task<CreditSurvey> CreateAsync(CreditNoVa_API.DataTransferObjects.CreditSurvey survey);
         Task<CreditSurvey> UpdateAsync(Guid id, CreditSurvey survey);
+        Task<CreditSurvey> UpdateScore(Guid id, int survey);
         Task<bool> DeleteAsync(Guid id);
     }
 }

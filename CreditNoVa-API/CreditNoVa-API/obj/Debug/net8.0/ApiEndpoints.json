@@ -320,5 +320,36 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CreditNoVa_API.Controllers.CreditSurveyController",
+    "Method": "UpdateScore",
+    "RelativePath": "api/survey/score/{id}/{score}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "score",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CreditNoVa_API.Models.CreditSurvey",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]
